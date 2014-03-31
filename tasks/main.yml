@@ -1,0 +1,26 @@
+---
+- name: install tinyproxy for Debian OS family
+  apt: pkg=tinyproxy state={{ tinyproxy_pkg_state }}
+  when: ansible_os_family == 'Debian'
+  tags: ["packages","tinyproxy"]
+
+- name: install tinyproxy for RedHat OS family
+  yum: name=tinyproxy state={{ tinyproxy_pkg_state }}
+  when: ansible_os_family == 'RedHat'
+  tags: ["packages","tinyproxy"]
+
+- name: configure tinyproxy
+  template: src=tinyproxy.conf.j2 dest=/etc/tinyproxy.conf owner=root group=root mode=644
+  notify: restart tinyproxy
+  tags: ["configuration","tinyproxy"]
+
+- name: configure filter
+  template: src=filter.j2 dest={{tinyproxy_filterfile}} owner=root group=root mode=644
+  notify: restart tinyproxy
+  when: tinyproxy_filteractivated
+  tags: ["configuration","tinyproxy"]
+
+- name: ensure tinyproxy is started/stopped
+  service: name=tinyproxy state={{ tinyproxy_service_state }} enabled={{ tinyproxy_service_enabled }}
+  tags: ["service","tinyproxy"]
+

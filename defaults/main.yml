@@ -1,0 +1,42 @@
+---
+tinyproxy_user: "nobody"
+tinyproxy_group: "nogroup"
+tinyproxy_port: "8888"
+
+tinyproxy_listen: "0.0.0.0"
+tinyproxy_timeout: 600
+tinyproxy_statfile: "/usr/share/tinyproxy/stats.html"
+tinyproxy_logfile: "/var/log/tinyproxy/tinyproxy.log"
+tinyproxy_loglevel: "Info"
+tinyproxy_pidfile: "/var/run/tinyproxy/tinyproxy.pid"
+tinyproxy_maxclient: 100
+tinyproxy_minSpareServers: 5
+tinyproxy_maxSpareServers: 20
+tinyproxy_startServers: 10
+tinyproxy_maxRequestsPerChild: 0
+tinyproxy_allows:
+   - 127.0.0.1
+
+tinyproxy_viaProxyName: "tinyproxy"
+tinyproxy_disableViaHeader: "no"
+
+tinyproxy_filters: []
+tinyproxy_filteractivated: "{{tinyproxy_filters|length > 0}}"
+tinyproxy_filterfile: "/etc/tinyproxy.filter"
+tinyproxy_filterURLs: "Off"
+tinyproxy_filterExtended: "Off"
+tinyproxy_filterCaseSensitive: "Off"
+tinyproxy_filterDefaultDeny: "No"
+
+tinyproxy_connectPorts:
+  - 443
+  - 563
+
+# Package states: installed or latest
+tinyproxy_pkg_state: installed
+
+# Service states: started or stopped
+tinyproxy_service_state: started
+
+# Service enabled on startup: yes or no
+tinyproxy_service_enabled: yes

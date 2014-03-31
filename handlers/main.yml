@@ -1,0 +1,7 @@
+---
+- name: restart tinyproxy
+  service: name=tinyproxy state=restarted
+
+- name: reload tinyproxy
+  service: name=tinyproxy state=reloaded
+
